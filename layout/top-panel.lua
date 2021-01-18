@@ -36,7 +36,7 @@ local make_keyboard_layout = function()
 end
 
 local make_cpu_widget = function()
-    return require("awesome-wm-widgets.cpu-widget.cpu-widget")({
+    return require("ext.awesome-wm-widgets.cpu-widget.cpu-widget")({
         width = dpi(70),
         step_width = dpi(2),
         step_spacing = dpi(0),
@@ -49,9 +49,9 @@ local keyboardlayout = build_widget(make_keyboard_layout())
 local battery = build_widget(require('widget.battery')())
 local network = build_widget(require('widget.network')())
 local cpu_widget = build_widget(make_cpu_widget())
-local ram_widget = require('awesome-wm-widgets.ram-widget.ram-widget')()
--- local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")()
--- local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")()
+local ram_widget = require('ext.awesome-wm-widgets.ram-widget.ram-widget')()
+-- local batteryarc_widget = require("ext.awesome-wm-widgets.batteryarc-widget.batteryarc")()
+-- local volumearc_widget = require("ext.awesome-wm-widgets.volumearc-widget.volumearc")()
 -- local wifi = require('net_widgets').wireless()
 -- local eth = require('net_widgets').indicator({
 --     interfaces  = {"eth0", "another_interface", "and_another_one"},
