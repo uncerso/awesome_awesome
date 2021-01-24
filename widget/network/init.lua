@@ -17,6 +17,7 @@ local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
 local apps = require('configuration.apps')
 local clickable_container = require('widget.clickable-container')
+local utils = require('utils')
 
 local config_dir = gears.filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. 'widget/network/icons/'
@@ -73,6 +74,7 @@ local return_button = function()
 
 	local network_tooltip = awful.tooltip {
 		text = 'Loading...',
+		delay_show = 0.5,
 		objects = {widget_button},
 		mode = 'outside',
 		align = 'right',
@@ -80,6 +82,8 @@ local return_button = function()
 		margin_leftright = dpi(8),
 		margin_topbottom = dpi(8)
 	}
+
+	utils.fix_tooltip_shape(network_tooltip)
 
 	local check_internet_health = [=[
 	status_ping=0

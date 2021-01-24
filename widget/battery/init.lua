@@ -9,6 +9,7 @@ local clickable_container = require('widget.clickable-container')
 local dpi = beautiful.xresources.apply_dpi
 local config_dir = gears.filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. 'widget/battery/icons/'
+local utils = require('utils')
 
 local return_button = function()
 
@@ -55,6 +56,7 @@ local return_button = function()
 
 	local battery_tooltip =  awful.tooltip {
 		objects = {battery_button},
+		delay_show = 0.5,
 		text = 'None',
 		mode = 'outside',
 		align = 'right',
@@ -63,6 +65,7 @@ local return_button = function()
 		preferred_positions = {'right', 'left', 'top', 'bottom'},
 	}
 
+	utils.fix_tooltip_shape(battery_tooltip)
 
 	local get_battery_info = function()
 		awful.spawn.easy_async_with_shell(

@@ -2,6 +2,7 @@ local wibox = require('wibox')
 local awful = require('awful')
 local gears = require('gears')
 local beautiful = require('beautiful')
+local utils = require('utils')
 local dpi = beautiful.xresources.apply_dpi
 local clickable_container = require('widget.clickable-container')
 local config = require('configuration.config')
@@ -31,32 +32,11 @@ local create_clock = function(s)
         widget = clickable_container
     }
 
-    s.clock_widget:connect_signal(
-        'mouse::enter',
-        function()
-            local w = mouse.current_wibox
-            if w then
-                old_cursor, old_wibox = w.cursor, w
-                w.cursor = 'hand4'
-            end
-        end
-    )
-
-    s.clock_widget:connect_signal(
-        'mouse::leave',
-        function()
-            if old_wibox then
-                old_wibox.cursor = old_cursor
-                old_wibox = nil
-            end
-        end
-    )
-
     s.clock_tooltip = awful.tooltip
     {
         objects = {s.clock_widget},
         mode = 'outside',
-        delay_show = 1,
+        delay_show = 0.5,
         preferred_positions = {'right', 'left', 'top', 'bottom'},
         preferred_alignments = {'middle', 'front', 'back'},
         margin_leftright = dpi(8),
@@ -93,6 +73,8 @@ local create_clock = function(s)
         end,
     }
 
+    utils.fix_tooltip_shape(s.clock_tooltip)
+
     s.clock_widget:connect_signal(
         'button::press',
         function(self, lx, ly, button)
@@ -111,8 +93,7 @@ local create_clock = function(s)
         margin            = dpi(5),
         screen            = s,
         style_month       = {
-            border_width  = beautiful.tooltip_border_width,
-            border_color  = beautiful.accent,
+            border_width  = 0,
             bg_color      = beautiful.background,
             padding       = dpi(20),
             shape         = beautiful.tooltip_shape,
@@ -139,6 +120,10 @@ local create_clock = function(s)
             end,
         },
     })
+
+    s.month_calendar:set_border_width(beautiful.tooltip_border_width)
+    s.month_calendar:set_border_color(beautiful.accent)
+    s.month_calendar:set_shape(beautiful.tooltip_shape)
 
     s.month_calendar:attach(
         s.clock_widget, 

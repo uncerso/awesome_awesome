@@ -184,6 +184,7 @@ theme.menu_border_color = theme.background:sub(1,7) .. '5C'
 -- Tooltips
 
 theme.tooltip_bg = theme.dark_background
+theme.tooltip_bg = '#000000'
 theme.tooltip_border_color = theme.accent
 theme.tooltip_border_width = dpi(1)
 theme.tooltip_gaps = dpi(5)
